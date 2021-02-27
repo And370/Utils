@@ -39,6 +39,8 @@ c:图片
 
     def file_extensions(self):
         """解析允许的文件类型"""
+        # TODO
+        # 目前仅支持视频，音频与图片部分未增加扩展名
         maps = {"a": video_extensions,
                 "b": audio_extensions,
                 "c": picture_extensions}
@@ -70,6 +72,10 @@ c:图片
             self.shell = client.Dispatch("WScript.Shell")
             lnkname = os.path.join(self.target_path,
                                    "【%s】" % title.replace("【", "").replace("】", "") + ".lnk")
+            # TODO
+            # 这边在python3中在解决掉文件名的非法问题后依然会报错
+            # python2存在明确解决办法如下参考https://stackoverflow.com/questions/38687822/python-create-shortcut-with-two-paths-and-argument/38688725
+            # 其中python3的办法需要调整代码，暂时不改动
             shortcut = self.shell.CreateShortCut(lnkname)
 
         shortcut.TargetPath = origin_file
